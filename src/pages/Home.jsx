@@ -18,18 +18,20 @@ const Home = () => {
 
   const participate = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_URL}/users`,
-        {name}
+        { name }
       );
-      if(response.status === 201){
+      if (response.status === 201) {
         setUser(response.data);
-        setMsg("success")
+        setMsg("success");
       }
     } catch (err) {
       setError(err.response?.data?.message);
     }
+    setIsLoading(false);
   };
 
   useEffect(()=>{
